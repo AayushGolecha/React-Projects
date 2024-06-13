@@ -1,0 +1,54 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+    font-size: 1.25rem;
+}
+
+.main {
+    display: flex;
+    width: 400px;
+    margin: 60px auto;
+    flex-direction: column;
+    align-items: center;
+    background-color: aqua;
+    gap: 20px;
+    border-radius: 30px;
+}
+
+.size {
+    font-size: 1.25rem;
+}
+
+button {
+    font-size: 1.5rem;
+    width: 110px;
+    font-weight: 700;
+    border-radius: 20px;
+    color: white;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 20px auto;
+}
+
+.btn1 {
+    background-color: green;
+}
+
+.btn2 {
+    background-color: red;
+}
+
+.space {
+    margin-bottom: 20px;
+}
+
+.bt {
+    margin-left: 25px;
+    width: 200px;
+}

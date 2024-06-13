@@ -1,0 +1,12 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form:last-child{
+  margin-bottom: 30px;
+}
+
+.form input,label,button{
+  font-size: 1.25rem;
+}
