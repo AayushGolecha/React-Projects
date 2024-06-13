@@ -1,0 +1,24 @@
+.App {
+  display: flex;
+  margin: 100px auto;
+  width: 350px;
+  flex-direction: column;
+  background-color: aqua;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 200px;
+}
+.App:first-child{
+  font-size: 2.5rem;
+}
+
+.flex{
+  display: flex;
+  gap: 15px;
+}
+.flex button{
+  font-size: 2rem;
+  color: white;
+  font-weight: 700;
+}
