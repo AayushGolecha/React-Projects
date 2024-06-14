@@ -10,7 +10,6 @@ function App() {
   let users = JSON.parse(localStorage.getItem('User-Data')) || [];
   const initialValue = { fullname: '', email: '', dob: '', password: '', confirmpassword: '' }
   const [check, setCheck] = useState(false);
-  console.log(check)
   
   // the validation schema for validating the values
   const validationSchema = Yup.object({
@@ -35,7 +34,6 @@ function App() {
         <Route path='/home' element={<Home validationSchema={validationSchema} users={users} initialValue={initialValue} check={check} setCheck={setCheck} />} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 export default App;

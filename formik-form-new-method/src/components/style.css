@@ -52,3 +52,17 @@ button {
     margin-left: 25px;
     width: 200px;
 }
+.img1{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 49.7%;
+    right: 43%;
+}
+.img2{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 58.3%;
+    right: 43%;
+}
