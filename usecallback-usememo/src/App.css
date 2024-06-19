@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+  margin: 50px auto;
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.light{
+  background-color: white;
+  color: black;
+}
+
+.dark{
+  background-color: black;
+  color: white;
+}
