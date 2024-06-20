@@ -1,28 +1,25 @@
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { postData } from '../services/apiclient';
-import { useEffect } from 'react'
 
 const Create = ({ firstName, lastName, setFirstName, setLastName }) => {
-    const navigate = useNavigate()
-    const handleNavigate = () => {
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        await postData(firstName, lastName)
         navigate('/')
     }
-    useEffect(() => {
-        localStorage.setItem('firstName', JSON.stringify(firstName))
-        localStorage.setItem('lastName', JSON.stringify(lastName))
-    }, [firstName, lastName])
     return (
         <div className='create'>
             <h1>Create Form</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>First Name:
                     <input onChange={(e) => setFirstName(e.target.value)} value={firstName} />
                 </label>
                 <label>Last Name:
                     <input onChange={(e) => setLastName(e.target.value)} value={lastName} />
                 </label>
-                <button className='green' onClick={() => { postData(); handleNavigate() }}>Submit</button>
+                <button type='submit' className='green'>Submit</button>
             </form>
         </div>
     )

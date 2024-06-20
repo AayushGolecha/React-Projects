@@ -1,12 +1,7 @@
 import axios from 'axios'
 
-export const postData = () => {
-    const firstName = JSON.parse(localStorage.getItem('firstName'))
-    const lastName = JSON.parse(localStorage.getItem('lastName'))
-    axios.post('https://6673e38f75872d0e0a942914.mockapi.io/fake', {
-        firstName,
-        lastName
-    })
+export const postData = async (firstName, lastName) => {
+    await axios.post('https://6673e38f75872d0e0a942914.mockapi.io/fake', { firstName, lastName })
 }
 
 export const getData = async () => {
@@ -14,13 +9,8 @@ export const getData = async () => {
     return response.data
 }
 
-export const putData = async (id) => {
-    const firstName = JSON.parse(localStorage.getItem('firstName'))
-    const lastName = JSON.parse(localStorage.getItem('lastName'))
-    await axios.put(`https://6673e38f75872d0e0a942914.mockapi.io/fake/${id}`, {
-        firstName,
-        lastName
-    })
+export const putData = async (id, firstName, lastName) => {
+    await axios.put(`'https://6673e38f75872d0e0a942914.mockapi.io/fake'/${id}`, { firstName, lastName })
 }
 
 export const deleteData = async(id) => {
