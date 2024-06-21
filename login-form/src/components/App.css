@@ -1,0 +1,55 @@
+.App {
+  text-align: center;
+}
+
+.position{
+  display: flex;
+  margin: 150px auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  gap: 5px;
+  background-color: purple;
+  border-radius: 30px;
+  color: beige;
+}
+.position h1{
+  font-size: 3rem;
+}
+
+.position form{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+.position form button{
+  width: 100px;
+  font-weight: 900;
+  font-size: 30px;
+}
+.font{
+  font-size: 20px;
+}
+.flex{
+  display: flex;
+  width: 380px;
+  justify-content: space-between;
+  
+}
+.flex input{
+  height: 30px;
+}
+.foo{
+  font-size: 1.25rem;
+}
+span{
+  font-size: 1rem;
+}
+.flex div{
+  display: flex;
+  flex-direction: column;
+}
