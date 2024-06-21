@@ -5,11 +5,11 @@ import { getData, deleteData } from '../services/apiclient';
 
 const Read = ({ setFirstName, setLastName }) => {
     const navigate = useNavigate()
-    const [val, setVal] = useState([])
+    const [data, setData] = useState([])
     const [update, setUpdate] = useState(false)
     const fetchData = useCallback(async () => {
         const response = await getData()
-        setVal(response)
+        setData(response)
         setUpdate(false)
     }, [])
     useEffect(() => {
@@ -32,26 +32,22 @@ const Read = ({ setFirstName, setLastName }) => {
     }
     return (
         <div className='read'>
-            <h1>Read Data</h1>
+            <h1>Read User Data</h1>
             <table>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Update</th>
-                        <th>Delete</th>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                {data.map((data) => (
+                    <tr key={data.id}>
+                        <td>{data.firstName}</td>
+                        <td>{data.lastName}</td>
+                        <td><button className='green' onClick={() => { handleUpdate(data) }}>Update</button></td>
+                        <td><button className='delete' onClick={() => handleDelete(data.id)}>Delete</button></td>
                     </tr>
-                </thead>
-                <tbody>
-                    {val.map((data) => (
-                        <tr key={data.id}>
-                            <td>{data.firstName}</td>
-                            <td>{data.lastName}</td>
-                            <td><button className='green' onClick={() => { handleUpdate(data) }}>Update</button></td>
-                            <td><button className='delete' onClick={() => handleDelete(data.id)}>Delete</button></td>
-                        </tr>
-                    ))}
-                </tbody>
+                ))}
             </table>
             <button className='add' onClick={handleCreate}>Add New User</button>
         </div>

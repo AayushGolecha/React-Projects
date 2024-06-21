@@ -11,13 +11,13 @@ const Create = ({ firstName, lastName, setFirstName, setLastName }) => {
     }
     return (
         <div className='create'>
-            <h1>Create Form</h1>
+            <h1>Create User</h1>
             <form onSubmit={handleSubmit}>
                 <label>First Name:
-                    <input onChange={(e) => setFirstName(e.target.value)} value={firstName} />
+                    <input onChange={(e) => setFirstName(e.target.value)} value={firstName} required />
                 </label>
                 <label>Last Name:
-                    <input onChange={(e) => setLastName(e.target.value)} value={lastName} />
+                    <input onChange={(e) => setLastName(e.target.value)} value={lastName} required />
                 </label>
                 <button type='submit' className='green'>Submit</button>
             </form>

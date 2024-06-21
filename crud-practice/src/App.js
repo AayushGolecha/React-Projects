@@ -8,15 +8,14 @@ import { useState } from 'react'
 function App() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/create" element={<Create firstName={firstName} lastName={lastName} setFirstName={setFirstName} setLastName={setLastName} />} />
-          <Route path="/" element={<Read setFirstName={setFirstName} setLastName={setLastName}/>} />
-          <Route path="/update" element={<Update firstName={firstName} lastName={lastName} setFirstName={setFirstName} setLastName={setLastName} />} />
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/create" element={<Create firstName={firstName} lastName={lastName} setFirstName={setFirstName} setLastName={setLastName} />} />
+        <Route path="/" element={<Read setFirstName={setFirstName} setLastName={setLastName} />} />
+        <Route path="/update" element={<Update firstName={firstName} lastName={lastName} setFirstName={setFirstName} setLastName={setLastName} />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

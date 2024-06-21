@@ -10,9 +10,9 @@ export const getData = async () => {
 }
 
 export const putData = async (id, firstName, lastName) => {
-    await axios.put(`'https://6673e38f75872d0e0a942914.mockapi.io/fake'/${id}`, { firstName, lastName })
+    await axios.put(`https://6673e38f75872d0e0a942914.mockapi.io/fake/${id}`, { firstName, lastName })
 }
 
-export const deleteData = async(id) => {
+export const deleteData = async (id) => {
     await axios.delete(`https://6673e38f75872d0e0a942914.mockapi.io/fake/${id}`)
 }

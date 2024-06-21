@@ -10,7 +10,7 @@ const Update = ({ firstName, lastName, setFirstName, setLastName }) => {
         setId(JSON.parse(localStorage.getItem('ID')))
         setFirstName(JSON.parse(localStorage.getItem('firstName')))
         setLastName(JSON.parse(localStorage.getItem('lastName')))
-    }, [setFirstName,setLastName])
+    }, [setFirstName, setLastName])
     const handleSubmit = async (e) => {
         e.preventDefault()
         await putData(id, firstName, lastName)
@@ -18,13 +18,13 @@ const Update = ({ firstName, lastName, setFirstName, setLastName }) => {
     }
     return (
         <div className='create'>
-            <h1>Update Form</h1>
+            <h1>Update User Details</h1>
             <form onSubmit={handleSubmit}>
                 <label>First Name:
-                    <input onChange={(e) => setFirstName(e.target.value)} value={firstName} />
+                    <input onChange={(e) => setFirstName(e.target.value)} value={firstName} required />
                 </label>
                 <label>Last Name:
-                    <input onChange={(e) => setLastName(e.target.value)} value={lastName} />
+                    <input onChange={(e) => setLastName(e.target.value)} value={lastName} required />
                 </label>
                 <button type='submit' className='green'>Update</button>
             </form>
