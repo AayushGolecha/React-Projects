@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Register initialValue={initialValue} validationSchema={validationSchema} users={users}/>} />
           <Route path='/login' element={<Login />} />
-          <Route path='/home' element={<Home />} />
+          <Route path='/home/:name' element={<Home />} />
         </Routes>
       </>
     </Router>

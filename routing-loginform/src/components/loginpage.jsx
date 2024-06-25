@@ -32,7 +32,7 @@ const Login = () => {
             setCheck1(false)
             setTimeout(() => {
                 setCheck(false)
-                navigate('/home')
+                navigate(`/home/${existsUser.fullname}`)
                 setCheck(true)
             }, 2000)
         }
