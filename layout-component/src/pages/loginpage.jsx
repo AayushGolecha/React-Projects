@@ -5,19 +5,24 @@ import { useNavigate } from 'react-router-dom'
 import Button from "../components/button"
 
 // eslint-disable-next-line react/prop-types
-const Loginpage = ({setCheck}) => {
+const Loginpage = ({ setCheck}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
   const handleSubmit = () => {
-    localStorage.setItem('email',JSON.stringify(email))
-    localStorage.setItem('password',JSON.stringify(password))
+    localStorage.setItem('email', JSON.stringify(email))
+    localStorage.setItem('password', JSON.stringify(password))
     setCheck(true)
     navigate(`/home/${email}`)
   }
+  
+  const handleReset = () => {
+    setEmail('')
+    setPassword('')
+  }
   return (
     <Loginlayout>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
         <label htmlFor="email">Email:</label>
         <input id="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} name="email" type="email" required />
         <label htmlFor="password">Password:</label>

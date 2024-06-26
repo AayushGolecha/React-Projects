@@ -23,8 +23,7 @@
     justify-content: center;
 }
 
-.head li:hover,
-li:active {
+.head li:hover {
     cursor: pointer;
     background-color: red;
 }
