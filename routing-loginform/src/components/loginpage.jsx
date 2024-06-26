@@ -22,17 +22,16 @@ const Login = () => {
             .matches(/[0-9]/, '*Password requires a number')
             .matches(/[a-z]/, '*Password requires a lowercase letter')
             .matches(/[A-Z]/, '*Password requires a uppercase letter')
-            .matches(/[^\w]/, '*Password requires a symbol').min(10, '*Password must be 10 characters long'),
+            .matches(/[^\w]/, '*Password requires a symbol').min(8, '*Password must be 8 characters long'),
     })
     const handleSubmit = (values, setSubmitting) => {
-        let existsUser = data.find((e) => (e.email === values.email && e.password === values.password))
-        console.log(existsUser)
-        if (existsUser) {
+        let checkUser = data.find((e) => (e.email === values.email && e.password === values.password))
+        if (checkUser) {
             setCheck(true)
             setCheck1(false)
             setTimeout(() => {
                 setCheck(false)
-                navigate(`/home/${existsUser.fullname}`)
+                navigate(`/home/${checkUser.fullname}`)
                 setCheck(true)
             }, 2000)
         }
@@ -44,16 +43,18 @@ const Login = () => {
     return (
         <div className='main'>
             <h1 style={{ margin: '0px' }}>Login</h1>
-            <p>Dont have a account? <Link to={'/'}>Sign-up</Link></p>
+            <p>Don&apos;t have an account? <Link className='col' to={'/'}>Sign up</Link></p>
             <Formik initialValues={initialValue} validationSchema={() => validationSchema} onSubmit={(values, { setSubmitting }) => { handleSubmit(values, setSubmitting) }}>
                 {({ isSubmitting, resetForm }) => (
                     <Form className='form'>
                         <label htmlFor="email">Email Address:</label>
                         <Field className="size" id="email" type='text' name='email' placeholder='Enter your email' />
                         <ErrorMessage className="red" name='email' component='span' />
-                        <label htmlFor="password">Password:</label>
-                        <Field className="size pos" id="password" type={img ? "text" : "password"} name='password' placeholder='Enter password' autoComplete="on" />
-                        {img ? <img className='img2' src={hidden} alt="Logo" onClick={handleToggle} /> : <img className='img2' src={eye} alt="Logo" onClick={handleToggle} />}
+                        <div>Password:</div>
+                        <label className='image' htmlFor="password">
+                            <Field className="size pos" id="password" type={img ? "text" : "password"} name='password' placeholder='Enter password' />
+                            {img ? <img className='img1' src={hidden} alt="Logo" onClick={handleToggle} /> : <img className='img1' src={eye} alt="Logo" onClick={handleToggle} />}
+                        </label>
                         <ErrorMessage className="red" name='password' component='span' />
                         <div className='btn'>
                             <button type='submit' disabled={isSubmitting}>Login</button>
@@ -67,5 +68,4 @@ const Login = () => {
         </div>
     )
 }
-
 export default Login

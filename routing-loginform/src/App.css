@@ -9,8 +9,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 250px;
   font-size: 1.25rem;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .main{
@@ -24,12 +25,16 @@
   border-radius: 20px;
 }
 
+.image{
+  position:relative
+}
+
 .img1{
   width: 20px;
   height: 20px;
   position: absolute;
-  top: 63.4%;
-  right: 43%;
+  top: 20%;
+  right: 5%;
 }
 .img2{
   width: 20px;
@@ -47,11 +52,22 @@
 }
 .btn{
   display: flex;
-  gap: 15px;
   margin-top: 20px;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  width: 265px;
 }
 .red{
   color: red;
+}
+
+span{
+  font-size: 0.9rem;
+}
+
+.col{
+  color: rgb(255, 0, 0);
+}
+
+p{
+  font-size: 1.1rem;
 }
