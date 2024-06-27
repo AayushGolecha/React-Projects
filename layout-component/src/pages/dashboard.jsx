@@ -5,5 +5,4 @@ const Dashboard = () => {
     <Layout>Dashboard</Layout>
   )
 }
-
 export default Dashboard

@@ -1,21 +1,16 @@
 import { useState } from "react"
 import Loginlayout from "../components/loginlayout"
 import './style.css'
-import { useNavigate } from 'react-router-dom'
 import Button from "../components/button"
 
-// eslint-disable-next-line react/prop-types
-const Loginpage = ({ setCheck}) => {
+const Loginpage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate()
   const handleSubmit = () => {
+    window, localStorage.setItem('isLoggedIn', true)
     localStorage.setItem('email', JSON.stringify(email))
     localStorage.setItem('password', JSON.stringify(password))
-    setCheck(true)
-    navigate(`/home/${email}`)
   }
-  
   const handleReset = () => {
     setEmail('')
     setPassword('')

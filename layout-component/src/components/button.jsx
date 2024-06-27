@@ -5,5 +5,4 @@ const Button = ({name,type}) => {
     <button type={type}>{name}</button>
   )
 }
-
 export default Button

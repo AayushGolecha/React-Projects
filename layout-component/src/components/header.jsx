@@ -11,7 +11,7 @@ const Header = () => {
         <Link to={`/contact/${email}`}><li>Contact</li></Link>
       </ul>
       <p>{email}</p>
-      <Link to='/'><button>Logout</button></Link>
+      <Link to='/'><button onClick={()=>window.localStorage.removeItem('isLoggedIn')}>Logout</button></Link>
     </div>
   )
 }

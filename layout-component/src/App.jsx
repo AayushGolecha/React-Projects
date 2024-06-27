@@ -4,23 +4,28 @@ import Loginpage from './pages/loginpage'
 import Homepage from './pages/homepage'
 import Aboutpage from './pages/aboutpage'
 import Contactpage from './pages/contactpage'
-import { PrivateRoutes} from './components/auth'
+import { PrivateRoutes, PrivateRoutes1 } from './components/auth'
 import { useState } from 'react'
+import PageNotFound from './pages/404page'
 
 function App() {
   const [check, setCheck] = useState(false)
+  console.log(check)
   return (
     <Router>
       <Routes>
+        <Route element={<PrivateRoutes1 />}>
           <Route path='/' element={<Loginpage setCheck={setCheck}/>} />
-        <Route element={<PrivateRoutes check={check} />}>
+        </Route>
+        <Route element={<PrivateRoutes />}>
           <Route path='/home/:email' element={<Homepage />} />
           <Route path='/about/:email' element={<Aboutpage />} />
           <Route path='contact/:email' element={<Contactpage />} />
+          <Route path='*' element={<PageNotFound />} />
         </Route>
+        
       </Routes>
     </Router>
   )
 }
-
 export default App
