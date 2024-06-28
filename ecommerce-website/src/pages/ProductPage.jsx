@@ -1,14 +1,17 @@
 import MainLayout from "../components/MainLayout"
 import { Product } from "../components/Product"
 import './style.css'
+import { useParams } from "react-router-dom"
 
 // eslint-disable-next-line react/prop-types
-const ProductPage = ({isLogged, setIsLogged, setId}) => {
+const ProductPage = ({ isLogged, setIsLogged, setId, count, setCount, setAdd, setQuantity, quantity }) => {
+  const { name } = useParams()
   return (
-    <MainLayout isLogged={isLogged} setIsLogged={setIsLogged}>
-      <div className='product-section'><Product isLogged={isLogged} setId={setId} /></div>
+    <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} count={count} setCount={setCount} name={name}>
+      <div className='product-section'>
+        <Product isLogged={isLogged} setId={setId} count={count} setCount={setCount} setAdd={setAdd} name={name} setQuantity={setQuantity} quantity={quantity}/>
+      </div>
     </MainLayout>
   )
 }
-
 export default ProductPage

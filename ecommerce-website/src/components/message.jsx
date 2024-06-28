@@ -1,6 +1,6 @@
-export const Msg = (props) => {
+// eslint-disable-next-line react/prop-types
+export const Msg = ({message}) => {
     return (
-        // eslint-disable-next-line react/prop-types
-        <div style={{ color: "red", marginBottom: "15px", marginTop: "15px"}}>{props.message}</div>
+        <div style={{ color: "red", marginBottom: "15px", marginTop: "15px"}}>{message}</div>
     )
 }

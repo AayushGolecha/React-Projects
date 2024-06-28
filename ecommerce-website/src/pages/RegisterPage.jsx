@@ -1,4 +1,3 @@
-
 import './style.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useState } from 'react';
@@ -6,7 +5,6 @@ import eye from '../assets/eye.png';
 import hidden from '../assets/hidden.png';
 import { useNavigate, Link } from 'react-router-dom';
 import { Msg } from '../components/message.jsx';
-
 
 // eslint-disable-next-line react/prop-types
 const Register = ({ initialValue, validationSchema, users }) => {

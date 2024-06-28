@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import './style.css'
 
 // eslint-disable-next-line react/prop-types
-const Login = ({setIsLogged}) => {
+const Login = ({ setIsLogged }) => {
     const initialValue = { email: '', password: '' }
     const navigate = useNavigate()
     const [check, setCheck] = useState(false);
@@ -32,10 +32,10 @@ const Login = ({setIsLogged}) => {
             setCheck(true)
             setCheck1(false)
             setIsLogged(true)
+            localStorage.setItem('fullname', JSON.stringify(checkUser.fullname))
             setTimeout(() => {
                 setCheck(false)
-                navigate(`/`)
-                //navigate(`/home/${checkUser.fullname}`)
+                navigate(`/${checkUser.fullname}`)
                 setCheck(true)
             }, 2000)
         }

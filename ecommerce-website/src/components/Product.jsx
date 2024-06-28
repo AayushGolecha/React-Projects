@@ -3,9 +3,9 @@ import { getData } from '../services/apiclient';
 import { useEffect, useState, useCallback } from 'react';
 
 // eslint-disable-next-line react/prop-types
-export const Product = ({isLogged, setId}) => {
+export const Product = ({ isLogged, setId, count, setCount, name, setQuantity, quantity }) => {
     const [data, setData] = useState([])
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const fetchData = useCallback(async () => {
         const response = await getData()
         setData(response)
@@ -13,34 +13,63 @@ export const Product = ({isLogged, setId}) => {
     useEffect(() => {
         fetchData()
     }, [fetchData])
-    const handleBuy = (e) => {
+    const handleBuy = (e, data) => {
         e.stopPropagation();
-        console.log('clicked')
+        if (isLogged) {
+            setCount(count + 1)
+            let storage = JSON.parse(localStorage.getItem("carts"));
+            if (storage == null) {
+                storage = [];
+            }
+            // eslint-disable-next-line react/prop-types
+            storage.push(data)
+            localStorage.setItem('carts', JSON.stringify(storage))
+            navigate(`/cart/${name}`)
+        }
+        else {
+            navigate('/login')
+        }
     }
-    const handleAdd = (e) => {
+    const handleAdd = (e, data) => {
         e.stopPropagation();
-        console.log('added')
+        setCount(count + 1)
+        let storage = JSON.parse(localStorage.getItem("carts"));
+        if (storage == null) {
+            storage = [];
+        }
+        let found = storage.find((storage) => storage.id === data.id)
+        if (found) {
+            console.log('yes')
+            localStorage.setItem('carts', JSON.stringify(storage))
+        }
+        else {
+            // eslint-disable-next-line react/prop-types
+            storage.push(data)
+            localStorage.setItem('carts', JSON.stringify(storage))
+        }
     }
-    const handlePage=(id)=>{
+    const handlePage = (id) => {
         setId(id)
-        navigate('/product-info')
+        navigate(isLogged ? `/product-info/${name}` : '/product-info')
+    }
+    const handleProp = (e) => {
+        e.stopPropagation();
     }
     return (
         <>
             {data.map((data) => (
-                <div key={data.id} className='pro' onClick={()=>{handlePage(data.id)}}>
+                <div key={data.id} className='pro' onClick={() => { handlePage(data.id) }}>
                     <img src={data.imageUrl} alt="Product" />
                     <div className='pro1'>
                         <span>{data.name}</span>
                         <span>₹{data.price}</span>
                     </div>
                     <div className='pro2'>
-                        <button className='green' onClick={isLogged ? (e) => handleBuy(e):''}>Buy Now</button>
-                        <button className='delete' onClick={isLogged ? (e) => handleAdd(e):''}>Add to cart</button>
+                        <button className='green' onClick={(e) => handleBuy(e, data)}>Buy Now</button>
+                        <button className='delete' onClick={isLogged ? (e) => { handleAdd(e, data) } : (e) => handleProp(e)}>Add to cart</button>
                     </div>
                 </div>
             ))}
         </>
     )
 }
-

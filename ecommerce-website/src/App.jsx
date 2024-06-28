@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import ProductPage from './pages/ProductPage'
 import AboutPage from './pages/AboutPage'
@@ -6,14 +6,17 @@ import ContactPage from './pages/ContactPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import InfoPage from './pages/InfoPage'
+import CartPage from './pages/CartPage'
 import * as Yup from 'yup';
 import { useState } from 'react'
 
 function App() {
-  const [isLogged, setIsLogged]=useState(false)
-  const [id, setId]=useState(0)
+  const [isLogged, setIsLogged] = useState(false)
+  const [id, setId] = useState(0)
+  const [count, setCount] = useState(0)
+  const [quantity, setQuantity]=useState(1)
   let users = JSON.parse(localStorage.getItem('User-Data')) || [];
-  const initialValue = { fullname: '', email: '', password: ''}
+  const initialValue = { fullname: '', email: '', password: '' }
   const validationSchema = Yup.object({
     fullname: Yup.string().required('*Required'),
     email: Yup.string().required('*Required').matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, '*Invalid email address'),
@@ -26,15 +29,21 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<ProductPage isLogged={isLogged} setIsLogged={setIsLogged} setId={setId}/>}/>
-        <Route path='/about' element={<AboutPage  isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
-        <Route path='/contact' element={<ContactPage  isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
-        <Route path='/login' element={<LoginPage setIsLogged={setIsLogged}/>}/>
-        <Route path='/product-info' element={<InfoPage  isLogged={isLogged} setIsLogged={setIsLogged} id={id}/>}/>
-        <Route path='/register' element={<RegisterPage initialValue={initialValue} validationSchema={validationSchema} users={users}/>}/>
+        <Route path='/' element={<ProductPage isLogged={isLogged} setIsLogged={setIsLogged} setId={setId} count={count} setCount={setCount} />} />
+        <Route path='/about' element={<AboutPage isLogged={isLogged} setIsLogged={setIsLogged} count={count} />} />
+        <Route path='/contact' element={<ContactPage isLogged={isLogged} setIsLogged={setIsLogged} count={count} />} />
+        <Route path='/login' element={<LoginPage setIsLogged={setIsLogged} />} />
+        <Route path='/product-info' element={<InfoPage isLogged={isLogged} setIsLogged={setIsLogged} id={id} count={count} setCount={setCount} />} />
+        <Route path='/register' element={<RegisterPage initialValue={initialValue} validationSchema={validationSchema} users={users} />} />
+        <Route path='/cart' element={<CartPage isLogged={isLogged} setIsLogged={setIsLogged} count={count} setCount={setCount} />} />
+
+        <Route path='/:name' element={<ProductPage isLogged={isLogged} setIsLogged={setIsLogged} setId={setId} count={count} setCount={setCount} setQuantity={setQuantity} quantity={quantity}/>} />
+        <Route path='/about/:name' element={<AboutPage isLogged={isLogged} setIsLogged={setIsLogged} count={count} />} />
+        <Route path='/contact/:name' element={<ContactPage isLogged={isLogged} setIsLogged={setIsLogged} count={count} />} />
+        <Route path='/product-info/:name' element={<InfoPage isLogged={isLogged} setIsLogged={setIsLogged} id={id} count={count} setCount={setCount} setQuantity={setQuantity} quantity={quantity}/>} />
+        <Route path='/cart/:name' element={<CartPage isLogged={isLogged} setIsLogged={setIsLogged} count={count} setCount={setCount} setQuantity={setQuantity} quantity={quantity}/>} />
       </Routes>
     </Router>
   )
 }
-
 export default App
