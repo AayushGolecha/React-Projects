@@ -3,7 +3,7 @@ import { getData } from '../services/apiclient';
 import { useEffect, useState, useCallback } from 'react';
 
 // eslint-disable-next-line react/prop-types
-export const Product = ({ isLogged, setId, count, setCount, name, setQuantity, quantity }) => {
+export const Product = ({ isLogged, setId, count, setCount, name }) => {
     const [data, setData] = useState([])
     const navigate = useNavigate()
     const fetchData = useCallback(async () => {
@@ -21,8 +21,13 @@ export const Product = ({ isLogged, setId, count, setCount, name, setQuantity, q
             if (storage == null) {
                 storage = [];
             }
-            // eslint-disable-next-line react/prop-types
-            storage.push(data)
+            let found = storage.find((storage) => storage.id === data.id)
+            if (found) {
+                found.Quantity += 1
+            }
+            else {
+                storage.push({ ...data, Quantity: 1 })
+            }
             localStorage.setItem('carts', JSON.stringify(storage))
             navigate(`/cart/${name}`)
         }
@@ -39,14 +44,12 @@ export const Product = ({ isLogged, setId, count, setCount, name, setQuantity, q
         }
         let found = storage.find((storage) => storage.id === data.id)
         if (found) {
-            console.log('yes')
-            localStorage.setItem('carts', JSON.stringify(storage))
+            found.Quantity += 1
         }
         else {
-            // eslint-disable-next-line react/prop-types
-            storage.push(data)
-            localStorage.setItem('carts', JSON.stringify(storage))
+            storage.push({ ...data, Quantity: 1 })
         }
+        localStorage.setItem('carts', JSON.stringify(storage))
     }
     const handlePage = (id) => {
         setId(id)
@@ -65,8 +68,8 @@ export const Product = ({ isLogged, setId, count, setCount, name, setQuantity, q
                         <span>₹{data.price}</span>
                     </div>
                     <div className='pro2'>
-                        <button className='green' onClick={(e) => handleBuy(e, data)}>Buy Now</button>
-                        <button className='delete' onClick={isLogged ? (e) => { handleAdd(e, data) } : (e) => handleProp(e)}>Add to cart</button>
+                        <button onClick={(e) => handleBuy(e, data)}>Buy Now</button>
+                        <button onClick={isLogged ? (e) => { handleAdd(e, data) } : (e) => handleProp(e)}>Add to cart</button>
                     </div>
                 </div>
             ))}

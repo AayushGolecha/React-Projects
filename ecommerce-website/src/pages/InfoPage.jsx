@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const InfoPage = ({ isLogged, setIsLogged, id, count, setCount, setQuantity, quantity }) => {
+const InfoPage = ({ isLogged, setIsLogged, id, count, setCount }) => {
     const { name } = useParams()
     const navigate = useNavigate()
     const [data, setData] = useState([])
@@ -23,8 +23,13 @@ const InfoPage = ({ isLogged, setIsLogged, id, count, setCount, setQuantity, qua
             if (storage == null) {
                 storage = [];
             }
-            // eslint-disable-next-line react/prop-types
-            storage.push(data)
+            let found = storage.find((storage) => storage.id === data.id)
+            if (found) {
+                found.Quantity += 1
+            }
+            else {
+                storage.push({ ...data, Quantity: 1 })
+            }
             localStorage.setItem('carts', JSON.stringify(storage))
             navigate(`/cart/${name}`)
         }
@@ -41,14 +46,12 @@ const InfoPage = ({ isLogged, setIsLogged, id, count, setCount, setQuantity, qua
         }
         let found = storage.find((storage) => storage.id === data.id)
         if (found) {
-            console.log('yes')
-            localStorage.setItem('carts', JSON.stringify(storage))
+            found.Quantity += 1
         }
         else {
-            // eslint-disable-next-line react/prop-types
-            storage.push(data)
-            localStorage.setItem('carts', JSON.stringify(storage))
+            storage.push({ ...data, Quantity: 1 })
         }
+        localStorage.setItem('carts', JSON.stringify(storage))
     }
     return (
         <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} count={count} name={name}>

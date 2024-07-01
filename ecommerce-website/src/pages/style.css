@@ -157,15 +157,14 @@ p {
 
 .product-cart {
     height: 50vh;
-    overflow-y: scroll;
     width: 480px;
     margin-left: 200px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
+    overflow-y: auto;
 }
 
 .cartbox-1 {
-    /* margin-top: 20px; */
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -178,4 +177,38 @@ p {
 .remove {
     color: white;
     width: 100px;
+}
+
+.boxes{
+    display: flex;
+}
+
+.shopping-cart{
+    margin: 10px auto;
+    width: 220px;
+}
+
+.proceed-to-buy{
+    display: flex;
+    flex-direction: column;
+    height: 24vh;
+    width: 480px;
+    margin-left: 200px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    align-items: center;
+    gap: 15px;
+}
+
+.proceed-to-buy button{
+    width: 400px;
+    border-radius: 30px;
+}
+
+.proceed-to-buy h1{
+    margin-top: 10px;
+}
+
+.proceed-to-buy div{
+    font-size: 1.5rem;
 }
