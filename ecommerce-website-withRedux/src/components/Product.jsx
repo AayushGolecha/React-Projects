@@ -1,18 +1,17 @@
+/* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom';
 import { getData } from '../services/apiclient';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux'
 import { add } from '../redux/countSlice'
 
-// eslint-disable-next-line react/prop-types
-export const Product = ({ isLogged, setId, name }) => {
+export const Product = ({ isLogged, setId, name, list, setList }) => {
     const dispatch = useDispatch()
-    const [data, setData] = useState([])
     const navigate = useNavigate()
     const fetchData = useCallback(async () => {
         const response = await getData()
-        setData(response)
-    }, [])
+        setList(response)
+    }, [setList])
     useEffect(() => {
         fetchData()
     }, [fetchData])
@@ -63,7 +62,7 @@ export const Product = ({ isLogged, setId, name }) => {
     }
     return (
         <>
-            {data.map((data) => (
+            {list.map((data) => (
                 <div key={data.id} className='pro' onClick={() => { handlePage(data.id) }}>
                     <img src={data.imageUrl} alt="Product" />
                     <div className='pro1'>

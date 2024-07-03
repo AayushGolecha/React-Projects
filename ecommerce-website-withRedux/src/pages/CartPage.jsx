@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import MainLayout from "../components/MainLayout"
 import './style.css'
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { reduce } from '../redux/countSlice'
 
@@ -10,6 +10,7 @@ const CartPage = ({ isLogged, setIsLogged }) => {
     const dispatch = useDispatch();
     const count = useSelector((state) => state.count.value)
     const { name } = useParams()
+    const navigate=useNavigate()
     let cart = JSON.parse(localStorage.getItem('carts')) || []
     const handleRemove = (id) => {
         let newCart = cart.filter((cart) => cart.id !== id)
@@ -28,6 +29,9 @@ const CartPage = ({ isLogged, setIsLogged }) => {
     }
     let nfObject = new Intl.NumberFormat('en-IN');
     let output = nfObject.format(total);
+    const handleCheckout=()=>{
+        navigate(`/checkout/${name}`)
+    }
     return (
         <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} name={name}>
             <div className="cartpage">
@@ -50,7 +54,7 @@ const CartPage = ({ isLogged, setIsLogged }) => {
                         <h1>Cart Total</h1>
                         <div>Subtotal ({totalItems} items): ₹{output}
                         </div>
-                        <button>Proceed to Buy</button>
+                        <button onClick={handleCheckout}>Proceed to Buy</button>
                     </div>
                 </div> : <p style={{ width: '180px', margin: 'auto', fontSize: '2rem' }}>Empty Cart!</p>}
             </div>

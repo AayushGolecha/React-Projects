@@ -47,7 +47,10 @@
     color: black;
     font-size: 1.2rem;
     border-radius: 7px;
-    margin-right: 100px;
+}
+.search{
+   display: flex; 
+   gap: 5px;
 }
 
 .head ul img {
@@ -57,18 +60,6 @@
 
 .head p {
     font-size: 1.5rem;
-}
-
-footer {
-    background-color: rgb(241, 121, 121);
-    color: black;
-    font-size: 1.5rem;
-    font-weight: 700;
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
 }
 
 a {
@@ -81,6 +72,7 @@ a {
     flex-wrap: wrap;
     gap: 20px;
     width: 1400px;
+   
 }
 
 .main {
@@ -91,6 +83,7 @@ a {
     display: flex;
     gap: 20px;
     margin-right: 50px;
+    align-items: center;
 }
 
 .cart {

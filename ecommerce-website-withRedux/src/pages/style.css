@@ -8,6 +8,7 @@
     border-radius: 10px;
     position: relative;
     cursor: pointer;
+    height: 285px;
 }
 
 .pro1 {
@@ -211,4 +212,59 @@ p {
 
 .proceed-to-buy div{
     font-size: 1.5rem;
+}
+
+.order-box{
+    width: 450px;
+    background-color: rgb(93, 90, 90);
+    color: white;
+    margin: 100px auto;
+    border-radius: 30px;
+}
+
+.greet{
+    margin: 0px 0px 25px 20px;
+    padding-top: 25px;
+}
+
+.order-details{
+    padding: 15px 15px 15px 20px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.paid{
+    padding: 20px 0px 20px 20px;
+    background-color: #a8729a;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.item{
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 350px;
+    margin: 15px 0px;
+    display: flex;
+    gap: 20px;
+    padding: 10px 10px
+}
+.item img{
+    width:90px;
+    height: 90px;
+}
+
+.item div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.data span{
+    font-size: 1rem;
+}
+
+.receipt{
+    display: flex;
+    justify-content: space-between;
 }

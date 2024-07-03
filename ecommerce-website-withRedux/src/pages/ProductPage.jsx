@@ -4,12 +4,12 @@ import './style.css'
 import { useParams } from "react-router-dom"
 
 // eslint-disable-next-line react/prop-types
-const ProductPage = ({ isLogged, setIsLogged, setId, setAdd }) => {
+const ProductPage = ({ isLogged, setIsLogged, setId, setAdd, searchVal, setSearchVal, list, setList }) => {
   const { name } = useParams()
   return (
-    <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} name={name}>
+    <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} name={name} searchVal={searchVal} setSearchVal={setSearchVal} list={list} setList={setList} >
       <div className='product-section'>
-        <Product isLogged={isLogged} setId={setId} setAdd={setAdd} name={name} />
+        <Product isLogged={isLogged} setId={setId} setAdd={setAdd} name={name} list={list} setList={setList} />
       </div>
     </MainLayout>
   )
