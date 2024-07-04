@@ -18,6 +18,9 @@ const Footer = () => {
               Aim
             </FooterLink>
             <FooterLink href="#">
+              Careers
+            </FooterLink>
+            <FooterLink href="#">
               Vision
             </FooterLink>
             <FooterLink href="#">
@@ -25,18 +28,18 @@ const Footer = () => {
             </FooterLink>
           </Column>
           <Column>
-            <Heading>Services</Heading>
+            <Heading>Make Money with Us</Heading>
             <FooterLink href="#">
-              Writing
+              Sell with Us
             </FooterLink>
             <FooterLink href="#">
-              Internships
+              Become an Affiliate
             </FooterLink>
             <FooterLink href="#">
-              Coding
+              Advertise Your Products
             </FooterLink>
             <FooterLink href="#">
-              Teaching
+              Global Selling
             </FooterLink>
           </Column>
           <Column>

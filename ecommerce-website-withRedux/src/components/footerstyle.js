@@ -18,7 +18,7 @@ export const FooterContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: 0 auto;
 	/* background: red; */
 `;
@@ -27,14 +27,14 @@ export const Column = styled.div`
 	display: flex;
 	flex-direction: column;
 	text-align: left;
-	margin-left: 60px;
+	margin-left: 40px;
 `;
 
 export const Row = styled.div`
 	display: grid;
 	grid-template-columns: repeat(
 		auto-fill,
-		minmax(185px, 1fr)
+		minmax(240px, 1fr)
 	);
 	grid-gap: 20px;
 

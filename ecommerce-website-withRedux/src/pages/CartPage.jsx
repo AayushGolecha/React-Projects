@@ -30,7 +30,12 @@ const CartPage = ({ isLogged, setIsLogged }) => {
     let nfObject = new Intl.NumberFormat('en-IN');
     let output = nfObject.format(total);
     const handleCheckout=()=>{
-        navigate(`/checkout/${name}`)
+        if (cart.length == 0) {
+            return false
+        }
+        else{
+            navigate(`/checkout/${name}`);
+        }
     }
     return (
         <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} name={name}>

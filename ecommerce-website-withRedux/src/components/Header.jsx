@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import './style.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import cart from '../assets/cart.svg'
 import search from '../assets/search.svg'
 import logo from '../assets/logo.png'
@@ -9,10 +9,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../redux/countSlice'
 import { getData } from '../services/apiclient';
 import { useEffect, useCallback } from 'react';
+import { Dropdown } from "flowbite-react";
 
 const Header = ({ isLogged, setIsLogged, name, list, setList, searchVal, setSearchVal }) => {
     const count = useSelector((state) => state.count.value)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     let response
     const fetchData = useCallback(async () => {
         response = await getData()
@@ -32,17 +34,20 @@ const Header = ({ isLogged, setIsLogged, name, list, setList, searchVal, setSear
         })
         setList(filterBySearch);
     }
+    const handleOrder = () => {
+        navigate(`/orders/${name}`);
+    }
     return (
         <div className='head'>
-            <ul>
+            <ul className='nav'>
                 <Link to={isLogged ? `/${name}` : `/`}><img src={logo} alt='logo' /></Link>
                 <Link to={isLogged ? `/${name}` : `/`}><li>Home</li></Link>
                 <Link to={isLogged ? `/about/${name}` : `/about`}><li>About</li></Link>
                 <Link to={isLogged ? `/contact/${name}` : `/contact`}><li>Contact</li></Link>
             </ul>
             <div className='search'>
-                <input type='search' placeholder='Search Products' onChange={(e) => setSearchVal(e.target.value)}/>
-                <img src={search} alt='search' onClick={handleSearch}/>
+                <input type='search' placeholder='Search Products' onChange={(e) => setSearchVal(e.target.value)} />
+                <img src={search} alt='search' onClick={handleSearch} />
             </div>
             <div className='box'>
                 <Link to={isLogged ? `/cart/${name}` : `/cart`}>
@@ -51,7 +56,10 @@ const Header = ({ isLogged, setIsLogged, name, list, setList, searchVal, setSear
                         {count >= 1 && isLogged ? <p>{count}</p> : ''}
                     </div>
                 </Link>
-                {isLogged ? <p>{name}</p> : ''}
+                {isLogged ? <div className='dropdown'><Dropdown label={name.toUpperCase()} inline>
+                    <Dropdown.Item >Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={handleOrder}>Orders</Dropdown.Item>
+                </Dropdown></div> : ''}
                 <Link to={isLogged ? '/' : '/login'}><button onClick={() => { handleDelete(); dispatch(logout()) }}>{isLogged ? 'Logout' : 'Login'}</button></Link>
             </div>
         </div>

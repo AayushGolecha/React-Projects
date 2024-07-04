@@ -37,7 +37,7 @@ const Login = ({ setIsLogged }) => {
                 setCheck(false)
                 navigate(`/${checkUser.fullname}`)
                 setCheck(true)
-            }, 2000)
+            }, 1000)
         }
         else {
             setCheck1(true)

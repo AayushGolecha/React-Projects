@@ -22,10 +22,11 @@ export const countSlice = createSlice({
                 }
             }
             state.value = totalItems
+        },
+        pay: (state) => {
+            state.value = 0
         }
     },
 })
-
-export const { add, logout, reduce } = countSlice.actions
-
+export const { add, logout, reduce, pay } = countSlice.actions
 export default countSlice.reducer
