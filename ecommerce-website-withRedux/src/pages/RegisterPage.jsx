@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './style.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useState } from 'react';
@@ -5,19 +6,18 @@ import eye from '../assets/eye.png';
 import hidden from '../assets/hidden.png';
 import { useNavigate, Link } from 'react-router-dom';
 import { Msg } from '../components/message.jsx';
+import { postUserData } from '../services/apiclient.jsx';
 
-// eslint-disable-next-line react/prop-types
-const Register = ({ initialValue, validationSchema, users }) => {
+// eslint-disable-next-line no-unused-vars
+const Register = ({ initialValue, validationSchema }) => {
     const [check, setCheck] = useState(false);
     const [img, setImg] = useState(false)
     const handleToggle = () => {
         setImg(!img)
     }
     const navigate = useNavigate()
-    const handleSubmit = (value, setSubmitting) => {
-        // eslint-disable-next-line react/prop-types
-        users.push(value)
-        localStorage.setItem('User-Data', JSON.stringify(users))
+    const handleSubmit = async(value, setSubmitting) => {
+        await postUserData(value.fullname, value.email, value.password)
         setCheck(true)
         setTimeout(() => {
             setCheck(false)

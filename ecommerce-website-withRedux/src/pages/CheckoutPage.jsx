@@ -1,14 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { pay } from "../redux/countSlice"
 import { useState } from "react"
+import { increment } from "../redux/orderIdSlice"
+import { postOrdersData } from "../services/apiclient"
 
 const CheckoutPage = () => {
     let cart = JSON.parse(localStorage.getItem('carts')) || []
+    let orders = JSON.parse(localStorage.getItem('orders')) || []
     const { name } = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [check, setCheck] = useState(false)
+    const Id=useSelector((state) => state.Id.value)
     let total = 0
     if (cart != null) {
         for (let i = 0; i < cart.length; i++) {
@@ -18,9 +22,12 @@ const CheckoutPage = () => {
         }
     }
     let nfObject = new Intl.NumberFormat('en-IN');
-    let output = nfObject.format(total);
-    const handlePay = () => {
+    let amount = nfObject.format(total);
+    const handlePay = async() => {
         setCheck(true)
+        orders = [...orders, [[...cart], Id, amount]];
+        await postOrdersData(orders)
+        localStorage.setItem('orders',JSON.stringify(orders))
         document.getElementsByClassName('order-confirm')[0].style.display = 'block';
         setTimeout(() => {
             navigate(`/${name}`)
@@ -28,6 +35,7 @@ const CheckoutPage = () => {
             let cart = []
             localStorage.setItem('carts', JSON.stringify(cart))
             setCheck(false)
+            dispatch(increment())
         }, 1500)
     }
     return (
@@ -53,7 +61,7 @@ const CheckoutPage = () => {
                         ))}
                     </div>
                     <hr />
-                    <h2 className="paid">Total Amount: ₹{output}</h2>
+                    <h2 className="paid">Total Amount: ₹{amount}</h2>
                 </div>
                 <button className="pay-btn" onClick={handlePay}>Pay Now</button>
             </div>}

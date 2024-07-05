@@ -1,9 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import eye from '../assets/eye.png';
 import hidden from '../assets/hidden.png';
 import { useNavigate, Link } from 'react-router-dom';
 import { Msg } from '../components/message.jsx';
+import { getUserData } from '../services/apiclient.jsx';
 import * as Yup from 'yup';
 import './style.css'
 
@@ -14,7 +15,14 @@ const Login = ({ setIsLogged }) => {
     const [check, setCheck] = useState(false);
     const [check1, setCheck1] = useState(false);
     const [img, setImg] = useState(false)
-    let data = JSON.parse(localStorage.getItem('User-Data'))
+    const [data, setData] = useState([])
+    useEffect(() => {
+        const loadData = async () => {
+            const result = await getUserData()
+            setData(result)
+        }
+        loadData()
+    }, [])
     const handleToggle = () => {
         setImg(!img)
     }
@@ -32,7 +40,6 @@ const Login = ({ setIsLogged }) => {
             setCheck(true)
             setCheck1(false)
             setIsLogged(true)
-            localStorage.setItem('fullname', JSON.stringify(checkUser.fullname))
             setTimeout(() => {
                 setCheck(false)
                 navigate(`/${checkUser.fullname}`)

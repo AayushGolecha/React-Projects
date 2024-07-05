@@ -18,17 +18,18 @@ const Header = ({ isLogged, setIsLogged, name, list, setList, searchVal, setSear
     let response
     const fetchData = useCallback(async () => {
         response = await getData()
-        setList(response)
+        await setList(response)
     }, [searchVal])
     useEffect(() => {
         fetchData()
     }, [fetchData])
     const handleDelete = () => {
         localStorage.removeItem('carts')
+        localStorage.removeItem('orders')
         setIsLogged(false);
     }
     const handleSearch = () => {
-        if (searchVal === "") { setList(response); return; }
+        if (searchVal === "") { setList(response); }
         const filterBySearch = list.filter((item) => {
             if (item.name.toLowerCase().includes(searchVal.toLowerCase())) { return item; }
         })
