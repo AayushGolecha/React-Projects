@@ -8,26 +8,8 @@ import { useState } from "react"
 const OrdersPage = ({ isLogged, setIsLogged, searchVal, setSearchVal, list, setList }) => {
   const { name } = useParams();
   let orders = JSON.parse(localStorage.getItem('orders')) || [];
-  const [check, setCheck]=useState(false)
-  const [item, setItem]=useState()
-  // let total = 0
-  // if (orders != null) {
-  //   for (let j = 0; j < orders.length; j++) {
-  //     let data = orders[j]
-  //     for (let i = 0; i < data.length-1; i++) {
-  //       let item = data[i]
-  //       console.log(item)
-  //       console.log(data.length)
-  //       for (let l = 0;l < item.length; l++) {
-  //         console.log(item.length)
-  //         let pro = item[l]
-  //         console.log(pro)
-  //         let amount = pro.Quantity * pro.price
-  //         total += amount
-  //       }
-  //     }
-  //   }
-  // }
+  const [check, setCheck] = useState(false)
+  const [item, setItem] = useState()
   const showOrderDetails = (data) => {
     setItem(data)
     setCheck(true)
@@ -54,7 +36,7 @@ const OrdersPage = ({ isLogged, setIsLogged, searchVal, setSearchVal, list, setL
             </div>
           ))}
         </div>
-        {check ?<div className="order-detail-box">
+        {check ? <div className="order-detail-box">
           <div className="order-top">
             <h2>Order-Details</h2>
             <h2>Total Items: {item.length}</h2>
@@ -70,7 +52,7 @@ const OrdersPage = ({ isLogged, setIsLogged, searchVal, setSearchVal, list, setL
               </div>
             </div>
           ))}
-        </div>:""}
+        </div> : ""}
       </div>
     </MainLayout>
   )

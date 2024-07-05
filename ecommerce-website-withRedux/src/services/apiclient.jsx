@@ -10,8 +10,8 @@ export const getProduct = async (id) => {
     return response.data
 }
 
-export const postUserData = async ( fullname, email, password) => {
-    await axios.post('https://66879c5a0bc7155dc018520b.mockapi.io/user-data', { fullname, email, password})
+export const postUserData = async (fullname, email, password) => {
+    await axios.post('https://66879c5a0bc7155dc018520b.mockapi.io/user-data', { fullname, email, password })
 }
 
 export const getUserData = async () => {
@@ -19,6 +19,6 @@ export const getUserData = async () => {
     return response.data
 }
 
-export const postOrdersData = async ( orders) => {
+export const postOrdersData = async (orders) => {
     await axios.post('https://6687aac40bc7155dc01892d8.mockapi.io/Orders-data', { orders })
 }

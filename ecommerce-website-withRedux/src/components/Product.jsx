@@ -8,7 +8,6 @@ import { add } from '../redux/countSlice'
 export const Product = ({ isLogged, setId, name, list, setList }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // let cart = JSON.parse(localStorage.getItem('carts')) || []
     const fetchData = useCallback(async () => {
         const response = await getData()
         setList(response)

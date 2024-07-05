@@ -58,7 +58,7 @@ const Header = ({ isLogged, setIsLogged, name, list, setList, searchVal, setSear
                     </div>
                 </Link>
                 {isLogged ? <div className='dropdown'><Dropdown label={name.toUpperCase()} inline>
-                    <Dropdown.Item >Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={() => navigate(`/profile/${name}`)}>Profile</Dropdown.Item>
                     <Dropdown.Item onClick={handleOrder}>Orders</Dropdown.Item>
                 </Dropdown></div> : ''}
                 <Link to={isLogged ? '/' : '/login'}><button onClick={() => { handleDelete(); dispatch(logout()) }}>{isLogged ? 'Logout' : 'Login'}</button></Link>

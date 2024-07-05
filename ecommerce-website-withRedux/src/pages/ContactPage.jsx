@@ -3,7 +3,7 @@ import './style.css'
 import { useParams } from "react-router-dom"
 
 // eslint-disable-next-line react/prop-types
-const ContactPage = ({ isLogged, setIsLogged}) => {
+const ContactPage = ({ isLogged, setIsLogged }) => {
   const { name } = useParams()
   return (
     <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} name={name}>

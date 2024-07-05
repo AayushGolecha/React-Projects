@@ -12,7 +12,7 @@ const CheckoutPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [check, setCheck] = useState(false)
-    const Id=useSelector((state) => state.Id.value)
+    const Id = useSelector((state) => state.Id.value)
     let total = 0
     if (cart != null) {
         for (let i = 0; i < cart.length; i++) {
@@ -23,11 +23,11 @@ const CheckoutPage = () => {
     }
     let nfObject = new Intl.NumberFormat('en-IN');
     let amount = nfObject.format(total);
-    const handlePay = async() => {
+    const handlePay = async () => {
         setCheck(true)
         orders = [...orders, [[...cart], Id, amount]];
         await postOrdersData(orders)
-        localStorage.setItem('orders',JSON.stringify(orders))
+        localStorage.setItem('orders', JSON.stringify(orders))
         document.getElementsByClassName('order-confirm')[0].style.display = 'block';
         setTimeout(() => {
             navigate(`/${name}`)

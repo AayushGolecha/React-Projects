@@ -10,7 +10,7 @@ const CartPage = ({ isLogged, setIsLogged }) => {
     const dispatch = useDispatch();
     const count = useSelector((state) => state.count.value)
     const { name } = useParams()
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     let cart = JSON.parse(localStorage.getItem('carts')) || []
     const handleRemove = (id) => {
         let newCart = cart.filter((cart) => cart.id !== id)
@@ -19,7 +19,7 @@ const CartPage = ({ isLogged, setIsLogged }) => {
     }
     let total = 0
     let totalItems = 0
-    if(cart != null){
+    if (cart != null) {
         for (let i = 0; i < cart.length; i++) {
             let item = cart[i]
             totalItems += item.Quantity
@@ -29,11 +29,11 @@ const CartPage = ({ isLogged, setIsLogged }) => {
     }
     let nfObject = new Intl.NumberFormat('en-IN');
     let output = nfObject.format(total);
-    const handleCheckout=()=>{
+    const handleCheckout = () => {
         if (cart.length == 0) {
             return false
         }
-        else{
+        else {
             navigate(`/checkout/${name}`);
         }
     }
@@ -51,7 +51,7 @@ const CartPage = ({ isLogged, setIsLogged }) => {
                                     <span>{cart.name}</span>
                                     <span>₹{cart.price}</span>
                                     <span>Quantity: {cart.Quantity}</span>
-                                    <button className="remove" onClick={() => {handleRemove(cart.id)}}>Remove</button>
+                                    <button className="remove" onClick={() => { handleRemove(cart.id) }}>Remove</button>
                                 </div>
                             </div>
                         ))}</div>
