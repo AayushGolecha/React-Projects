@@ -71,7 +71,7 @@ export const Product = ({ isLogged, setId, name, list, setList }) => {
                     </div>
                     <div className='pro2'>
                         <button onClick={(e) => handleBuy(e, data)}>Buy Now</button>
-                        <button onClick={isLogged ? (e) => { handleAdd(e, data) } : (e) => handleProp(e)}>Add to cart</button>
+                        <button onClick={isLogged ? (e) => { handleAdd(e, data) } : (e) => handleProp(e)}>Add to Cart</button>
                     </div>
                 </div>
             ))}

@@ -5,7 +5,8 @@ import { useState } from "react"
 import { increment } from "../redux/orderIdSlice"
 import { postOrdersData } from "../services/apiclient"
 
-const CheckoutPage = () => {
+// eslint-disable-next-line react/prop-types
+const CheckoutPage = ({ isLogged, setId }) => {
     let cart = JSON.parse(localStorage.getItem('carts')) || []
     let orders = JSON.parse(localStorage.getItem('orders')) || []
     const { name } = useParams()
@@ -30,13 +31,17 @@ const CheckoutPage = () => {
         localStorage.setItem('orders', JSON.stringify(orders))
         document.getElementsByClassName('order-confirm')[0].style.display = 'block';
         setTimeout(() => {
-            navigate(`/${name}`)
+            navigate(`/logged/${name}`)
             dispatch(pay())
             let cart = []
             localStorage.setItem('carts', JSON.stringify(cart))
             setCheck(false)
             dispatch(increment())
         }, 1500)
+    }
+    const handlePage = (id) => {
+        setId(id)
+        navigate(isLogged ? `/product-info/${name}` : '/product-info')
     }
     return (
         <>
@@ -51,7 +56,7 @@ const CheckoutPage = () => {
                         </div>
                         {cart.map((cart) => (
                             <div className="item" key={cart.id}>
-                                <img src={cart.imageUrl} alt="product image" />
+                                <img src={cart.imageUrl} alt="product image" onClick={() => { handlePage(cart.id) }} />
                                 <div className="data">
                                     <span>{cart.name}</span>
                                     <span>Qty: {cart.Quantity}</span>

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { reduce } from '../redux/countSlice'
 
 // eslint-disable-next-line react/prop-types
-const CartPage = ({ isLogged, setIsLogged }) => {
+const CartPage = ({ isLogged, setIsLogged, setId }) => {
     const dispatch = useDispatch();
     const count = useSelector((state) => state.count.value)
     const { name } = useParams()
@@ -37,6 +37,10 @@ const CartPage = ({ isLogged, setIsLogged }) => {
             navigate(`/checkout/${name}`);
         }
     }
+    const handlePage = (id) => {
+        setId(id)
+        navigate(isLogged ? `/product-info/${name}` : '/product-info')
+    }
     return (
         <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} name={name}>
             <div className="cartpage">
@@ -46,7 +50,7 @@ const CartPage = ({ isLogged, setIsLogged }) => {
                         <h1 className="shopping-cart">Shopping Cart</h1>
                         {cart.map((cart) => (
                             <div key={cart.id} className='cartbox'>
-                                <img src={cart.imageUrl} alt="Product" />
+                                <img src={cart.imageUrl} alt="Product" onClick={() => { handlePage(cart.id) }} />
                                 <div className='cartbox-1'>
                                     <span>{cart.name}</span>
                                     <span>₹{cart.price}</span>

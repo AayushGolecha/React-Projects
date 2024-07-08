@@ -1,22 +1,26 @@
 import MainLayout from "../components/MainLayout"
 import './style.css'
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import cross from '../assets/cross.svg'
 import { useState } from "react"
 
 // eslint-disable-next-line react/prop-types
-const OrdersPage = ({ isLogged, setIsLogged, searchVal, setSearchVal, list, setList }) => {
+const OrdersPage = ({ isLogged, setIsLogged, searchVal, setSearchVal, list, setList, setId }) => {
   const { name } = useParams();
   let orders = JSON.parse(localStorage.getItem('orders')) || [];
   const [check, setCheck] = useState(false)
   const [item, setItem] = useState()
+  const navigate = useNavigate()
   const showOrderDetails = (data) => {
     setItem(data)
     setCheck(true)
-    document.getElementsByClassName("order-detail-box")[0].style.display = 'block';
   }
   const handleClose = () => {
-    document.getElementsByClassName("order-detail-box")[0].style.display = 'none';
+    setCheck(false)
+  }
+  const handlePage = (id) => {
+    setId(id)
+    navigate(isLogged ? `/product-info/${name}` : '/product-info')
   }
   return (
     <MainLayout isLogged={isLogged} setIsLogged={setIsLogged} name={name} searchVal={searchVal} setSearchVal={setSearchVal} list={list} setList={setList} >
@@ -43,8 +47,8 @@ const OrdersPage = ({ isLogged, setIsLogged, searchVal, setSearchVal, list, setL
             <img src={cross} alt="cross" onClick={handleClose} />
           </div>
           {item.map((item) => (
-            <div key={item.id} className='orderbox'>
-              <img src={item.imageUrl} alt="Product" />
+            <div key={item.id} className='orderbox' >
+              <img src={item.imageUrl} alt="Product" onClick={() => { handlePage(item.id) }} />
               <div className='orderbox-1'>
                 <span>{item.name}</span>
                 <span>₹{item.price}</span>
