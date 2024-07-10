@@ -3,7 +3,7 @@ import { getProduct } from '../services/apiclient';
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { add } from '../redux/countSlice'
+import { add, increaseQuantity } from '../redux/countSlice'
 
 // eslint-disable-next-line react/prop-types
 const InfoPage = ({ isLogged, setIsLogged, id }) => {
@@ -12,9 +12,11 @@ const InfoPage = ({ isLogged, setIsLogged, id }) => {
     const { name } = useParams()
     const navigate = useNavigate()
     const [data, setData] = useState([])
+    const [quantity, setQuantity] = useState(null)
     const fetchData = useCallback(async () => {
         const response = await getProduct(id)
         setData(response)
+        setQuantity(response.Quantity)
     }, [id])
     useEffect(() => {
         fetchData()
@@ -48,23 +50,32 @@ const InfoPage = ({ isLogged, setIsLogged, id }) => {
     }
     const handleAdd = (e, data) => {
         e.stopPropagation();
-        if (count < 50) {
-            dispatch(add())
+        if (count < 50 && (count+quantity <= 50) ) {
             let storage = JSON.parse(localStorage.getItem("carts"));
             if (storage == null) {
                 storage = [];
             }
             let found = storage.find((storage) => storage.id === data.id)
             if (found) {
-                found.Quantity += 1
+                found.Quantity += quantity
+                dispatch(increaseQuantity(Number(quantity)))
             }
             else {
-                storage.push({ ...data, Quantity: 1 })
+                storage.push({ ...data, Quantity: quantity })
+                dispatch(increaseQuantity(Number(quantity)))
             }
             localStorage.setItem('carts', JSON.stringify(storage))
         }
-        else{
+        else {
             return false
+        }
+    }
+    const handleIncrease=()=>{
+        setQuantity(quantity => quantity+1)
+    }
+    const handleDecrease=()=>{
+        if(quantity>1){
+            setQuantity(quantity => quantity-1)
         }
     }
     return (
@@ -76,7 +87,11 @@ const InfoPage = ({ isLogged, setIsLogged, id }) => {
                     <div className='product1'>
                         <span>{data.name}</span>
                         <span>₹{data.price}</span>
-                        <span>Quantity: {data.Quantity}</span>
+                        <span className="item-quantity">Quantity:
+                            <div onClick={()=>handleDecrease()}>-</div>
+                            {quantity}
+                            <div onClick={()=>handleIncrease()}>+</div>
+                        </span>
                     </div>
                     <div className='product2'>
                         <button className='green' onClick={(e) => handleBuy(e, data)} >Buy Now</button>

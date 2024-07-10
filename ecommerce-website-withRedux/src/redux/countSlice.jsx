@@ -28,8 +28,11 @@ export const countSlice = createSlice({
         },
         pay: (state) => {
             state.value = 0
+        },
+        increaseQuantity: (state, action) => {
+            state.value += action.payload
         }
     },
 })
-export const { add, decrease, logout, reduce, pay } = countSlice.actions
+export const { add, decrease, logout, reduce, pay, increaseQuantity } = countSlice.actions
 export default countSlice.reducer

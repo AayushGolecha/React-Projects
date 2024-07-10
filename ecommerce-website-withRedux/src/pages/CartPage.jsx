@@ -4,6 +4,7 @@ import './style.css'
 import { useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { add, reduce, decrease } from '../redux/countSlice'
+import { useState } from "react"
 
 // eslint-disable-next-line react/prop-types
 const CartPage = ({ isLogged, setIsLogged, setId }) => {
@@ -11,6 +12,7 @@ const CartPage = ({ isLogged, setIsLogged, setId }) => {
     const count = useSelector((state) => state.count.value)
     const { name } = useParams()
     const navigate = useNavigate()
+    const [quantity, setQuantity] = useState(null)
     let cart = JSON.parse(localStorage.getItem('carts')) || []
     const handleRemove = (id) => {
         let newCart = cart.filter((cart) => cart.id !== id)
@@ -42,16 +44,21 @@ const CartPage = ({ isLogged, setIsLogged, setId }) => {
         navigate(isLogged ? `/product-info/${name}` : '/product-info')
     }
     const handleIncrease = (data) => {
-        let storage = JSON.parse(localStorage.getItem("carts"));
-        if (storage == null) {
-            storage = [];
+        if (count < 50) {
+            let storage = JSON.parse(localStorage.getItem("carts"));
+            if (storage == null) {
+                storage = [];
+            }
+            let found = storage.find((storage) => storage.id === data.id)
+            if (found) {
+                found.Quantity += 1
+                dispatch(add());
+            }
+            localStorage.setItem('carts', JSON.stringify(storage))
         }
-        let found = storage.find((storage) => storage.id === data.id)
-        if (found) {
-            found.Quantity += 1
-            dispatch(add());
+        else {
+            alert("The Max Purchase Limit Reached.");
         }
-        localStorage.setItem('carts', JSON.stringify(storage))
     }
     const handleDecrease = (data) => {
         let storage = JSON.parse(localStorage.getItem("carts"));
@@ -62,7 +69,7 @@ const CartPage = ({ isLogged, setIsLogged, setId }) => {
         if (found) {
             if (found.Quantity > 1) {
                 found.Quantity -= 1
-                dispatch(decrease()); 
+                dispatch(decrease());
                 localStorage.setItem('carts', JSON.stringify(storage))
             }
             else {

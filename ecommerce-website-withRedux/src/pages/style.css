@@ -173,7 +173,7 @@ p {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 150px;
+    width: 165px;
 }
 
 .cartbox-1 span {
@@ -195,6 +195,7 @@ p {
     align-items: center;
     border-radius: 50%;
     cursor: pointer;
+    font-size: 1.8rem;
 }
 
 .remove {
@@ -477,4 +478,9 @@ p {
 .spinner{
     width: 100px;
     margin: 150px 0px 150px 800px;
+}
+.alert{
+    position: absolute;
+    top: 20%;
+    right: 10%;
 }
